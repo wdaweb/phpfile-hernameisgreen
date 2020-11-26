@@ -49,6 +49,7 @@ $filename=date("Ymdhis").".".$subname;
 
 print_r($row);
 save("upload", $row);
+to('manage.php');
     }
 
  /* 可能是第一次進來或是上傳完檔案的 */
@@ -65,15 +66,15 @@ save("upload", $row);
     <title>檔案上傳</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        table{
-            border: 3px double blue;
-            padding: 20px;
-            border-collapse: collapse;
-        }
-        td{
-            border: 1px solid #EEE;
-            padding: 5px;
-        }
+     form{
+         border: 3px solid blue;
+         margin: auto;
+         padding: 20px;
+         width: 300px;
+     }
+     form div{
+         margin: 5px 0;
+     }
     </style>
 </head>
 <body>
@@ -94,38 +95,5 @@ save("upload", $row);
 
 
 <!----建立一個連結來查看上傳後的圖檔---->  
-<?php
-$rows=all('upload');
-echo "<table>";
-echo "<td>preview</td>";
-echo "<td>檔案名稱</td>";
-echo "<td>檔案類型</td>";
-echo "<td>檔案說明</td>";
-echo "<td>檔案下載</td>";
-
-foreach($rows as $row){
-echo "<tr>";
-if($row['type']=='圖檔'){
-    echo "<td><img src='{$row['path']}' style='width:100px'></td>";
-}else{
-    echo "<td></td>";
-}
-echo "<td>{$row['name']}</td>";
-/* echo "<td>{$row['name']}</td>"; */
-echo "<td>{$row['type']}</td>";
-echo "<td>{$row['note']}</td>";
-echo "<td><a href='{$row['path']}' download>下載</a></td>";
-
-echo"</tr>";
-
-
-
-
-}
-echo"</table>";
-
-
-
-?>
 </body>
 </html>

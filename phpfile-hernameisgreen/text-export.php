@@ -14,10 +14,12 @@ include_once "base.php";
 
 if (!empty($_GET['do']) && $_GET['do'] == 'download') {
     $rows = all("students");
+    /* 開新檔案 */
     $file = fopen('download.csv', "w+");
     /* 先寫入BOM excel才部會是亂碼 */ 
     $utf8_with_bom = chr(239) . chr(187) . chr(191);
     fwrite($file, $utf8_with_bom);
+    /* 寫入表頭 */
     foreach ($rows as $row) {
         $line = implode(',', [$row['id'], $row['name'], $row['age'], $row['birthday'], $row['addr']]);
         fwrite($file, $line);
@@ -25,6 +27,7 @@ if (!empty($_GET['do']) && $_GET['do'] == 'download') {
     }
     fclose($file);
     $filename = "download.csv";
+    /* 只是為了下面download連結 */
 }
 
 
